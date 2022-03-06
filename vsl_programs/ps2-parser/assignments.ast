@@ -1,0 +1,28 @@
+─PROGRAM
+ └─FUNCTION
+   ├─IDENTIFIER_DATA(main)
+   ├─(nil)
+   └─BLOCK
+     ├─DECLARATION_LIST
+     │ └─DECLARATION
+     │   └─VARIABLE_LIST
+     │     └─IDENTIFIER_DATA(a)
+     └─STATEMENT_LIST
+       ├─ASSIGNMENT_STATEMENT
+       │ ├─IDENTIFIER_DATA(a)
+       │ └─NUMBER_DATA(3)
+       ├─ADD_STATEMENT
+       │ ├─IDENTIFIER_DATA(a)
+       │ └─NUMBER_DATA(1)
+       ├─DIVIDE_STATEMENT
+       │ ├─IDENTIFIER_DATA(a)
+       │ └─NUMBER_DATA(2)
+       ├─MULTIPLY_STATEMENT
+       │ ├─IDENTIFIER_DATA(a)
+       │ └─NUMBER_DATA(32)
+       ├─SUBTRACT_STATEMENT
+       │ ├─IDENTIFIER_DATA(a)
+       │ └─NUMBER_DATA(2)
+       └─PRINT_STATEMENT
+         └─EXPRESSION((null))
+           └─IDENTIFIER_DATA(a)

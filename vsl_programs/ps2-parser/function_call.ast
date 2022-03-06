@@ -1,0 +1,25 @@
+─PROGRAM
+ ├─FUNCTION
+ │ ├─IDENTIFIER_DATA(add)
+ │ ├─VARIABLE_LIST
+ │ │ ├─IDENTIFIER_DATA(a)
+ │ │ └─IDENTIFIER_DATA(b)
+ │ └─BLOCK
+ │   └─STATEMENT_LIST
+ │     └─RETURN_STATEMENT
+ │       └─EXPRESSION(+)
+ │         ├─EXPRESSION((null))
+ │         │ └─IDENTIFIER_DATA(a)
+ │         └─EXPRESSION((null))
+ │           └─IDENTIFIER_DATA(b)
+ └─FUNCTION
+   ├─IDENTIFIER_DATA(main)
+   ├─(nil)
+   └─BLOCK
+     └─STATEMENT_LIST
+       └─PRINT_STATEMENT
+         └─EXPRESSION((null))
+           ├─IDENTIFIER_DATA(add)
+           └─EXPRESSION_LIST
+             ├─NUMBER_DATA(40)
+             └─NUMBER_DATA(2)

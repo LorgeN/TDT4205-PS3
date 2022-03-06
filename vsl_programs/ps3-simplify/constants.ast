@@ -1,0 +1,26 @@
+─PROGRAM
+ └─FUNCTION
+   ├─IDENTIFIER_DATA(main)
+   ├─(nil)
+   └─BLOCK
+     ├─DECLARATION_LIST
+     │ └─DECLARATION
+     │   └─VARIABLE_LIST
+     │     └─IDENTIFIER_DATA(a)
+     └─STATEMENT_LIST
+       ├─ASSIGNMENT_STATEMENT
+       │ ├─IDENTIFIER_DATA(a)
+       │ └─NUMBER_DATA(42)
+       ├─ASSIGNMENT_STATEMENT
+       │ ├─IDENTIFIER_DATA(b)
+       │ └─NUMBER_DATA(42)
+       └─IF_STATEMENT
+         ├─RELATION
+         │ ├─EXPRESSION((null))
+         │ │ └─IDENTIFIER_DATA(a)
+         │ └─EXPRESSION((null))
+         │   └─IDENTIFIER_DATA(b)
+         └─PRINT_STATEMENT
+           ├─STRING_DATA("The answer is")
+           └─EXPRESSION((null))
+             └─IDENTIFIER_DATA(b)

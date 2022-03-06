@@ -1,0 +1,28 @@
+─PROGRAM
+ └─FUNCTION
+   ├─IDENTIFIER_DATA(main)
+   ├─(nil)
+   └─BLOCK
+     ├─DECLARATION_LIST
+     │ └─DECLARATION
+     │   └─VARIABLE_LIST
+     │     └─IDENTIFIER_DATA(i)
+     └─STATEMENT_LIST
+       ├─ASSIGNMENT_STATEMENT
+       │ ├─IDENTIFIER_DATA(i)
+       │ └─NUMBER_DATA(2)
+       ├─WHILE_STATEMENT
+       │ ├─RELATION
+       │ │ ├─EXPRESSION((null))
+       │ │ │ └─IDENTIFIER_DATA(i)
+       │ │ └─NUMBER_DATA(9000)
+       │ └─ASSIGNMENT_STATEMENT
+       │   ├─IDENTIFIER_DATA(i)
+       │   └─EXPRESSION(*)
+       │     ├─EXPRESSION((null))
+       │     │ └─IDENTIFIER_DATA(i)
+       │     └─EXPRESSION((null))
+       │       └─IDENTIFIER_DATA(i)
+       └─PRINT_STATEMENT
+         └─EXPRESSION((null))
+           └─IDENTIFIER_DATA(i)

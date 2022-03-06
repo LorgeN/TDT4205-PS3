@@ -1,0 +1,41 @@
+─PROGRAM
+ ├─DECLARATION
+ │ └─VARIABLE_LIST
+ │   └─IDENTIFIER_DATA(global_var)
+ ├─FUNCTION
+ │ ├─IDENTIFIER_DATA(my_func)
+ │ ├─VARIABLE_LIST
+ │ │ └─IDENTIFIER_DATA(param)
+ │ └─BLOCK
+ │   ├─DECLARATION_LIST
+ │   │ └─DECLARATION
+ │   │   └─VARIABLE_LIST
+ │   │     ├─IDENTIFIER_DATA(local_var)
+ │   │     └─IDENTIFIER_DATA(local_var2)
+ │   └─STATEMENT_LIST
+ │     └─ASSIGNMENT_STATEMENT
+ │       ├─IDENTIFIER_DATA(local_var)
+ │       └─NUMBER_DATA(1)
+ ├─DECLARATION
+ │ └─VARIABLE_LIST
+ │   ├─IDENTIFIER_DATA(glob1)
+ │   └─IDENTIFIER_DATA(glob2)
+ └─FUNCTION
+   ├─IDENTIFIER_DATA(main)
+   ├─(nil)
+   └─BLOCK
+     ├─DECLARATION_LIST
+     │ └─DECLARATION
+     │   └─VARIABLE_LIST
+     │     └─IDENTIFIER_DATA(main_local_var)
+     └─STATEMENT_LIST
+       └─BLOCK
+         ├─DECLARATION_LIST
+         │ └─DECLARATION
+         │   └─VARIABLE_LIST
+         │     └─IDENTIFIER_DATA(main_local_nested_var)
+         └─STATEMENT_LIST
+           └─ASSIGNMENT_STATEMENT
+             ├─IDENTIFIER_DATA(main_local_nested_var)
+             └─EXPRESSION((null))
+               └─IDENTIFIER_DATA(main_local_var)
