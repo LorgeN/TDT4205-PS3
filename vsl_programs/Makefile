@@ -8,7 +8,7 @@ ps2: $(PS2_EXAMPLES)
 ps3: $(PS3_EXAMPLES)
 
 %.ast: %.vsl
-	$(VSLC) -t < $^ > $@
+	$(VSLC) -T < $^ > $@
 
 clean:
 	-rm -r */*.ast

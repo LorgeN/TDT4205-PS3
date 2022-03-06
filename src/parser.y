@@ -14,6 +14,17 @@
     node_init ( n = malloc(sizeof(node_t)), t, d, 3, a, b, c ); \
 } while ( false )
 
+#define EXPAND(v, n, c) \
+node_t **new_children = realloc(n->children, (n->n_children + 1) * sizeof(node_t*)); \
+if (new_children == NULL) { \
+    exit( EXIT_FAILURE ); \
+} \
+\
+new_children[n->n_children] = c; \
+n->n_children += 1; \
+n->children = new_children; \
+v = n
+
 %}
 
 %left '|'
@@ -34,56 +45,54 @@ program :
     ;
 global_list :
       global { N1C ( $$, GLOBAL_LIST, NULL, $1 ); }
-    | global_list global { N2C ( $$, GLOBAL_LIST, NULL, $1, $2 ); }
+    | global_list global { EXPAND( $$, $1, $2 ); }
     ;
 global:
-      function { N1C ( $$, GLOBAL, NULL, $1 ); }
-    | declaration { N1C ( $$, GLOBAL, NULL, $1 ); }
+      function { $$ = $1; }
+    | declaration { $$ = $1; }
     ;
 statement_list :
       statement { N1C ( $$, STATEMENT_LIST, NULL, $1 ); }
-    | statement_list statement { N2C ( $$, STATEMENT_LIST, NULL, $1, $2 ); }
+    | statement_list statement { EXPAND( $$, $1, $2 ); }
     ;
 print_list :
       print_item { N1C ( $$, PRINT_LIST, NULL, $1 ); }
-    | print_list ',' print_item { N2C ( $$, PRINT_LIST, NULL, $1, $3 ); }
+    | print_list ',' print_item { EXPAND( $$, $1, $3 ); }
     ;
 expression_list :
       expression { N1C ( $$, EXPRESSION_LIST, NULL, $1 ); }
-    | expression_list ',' expression { N2C($$, EXPRESSION_LIST, NULL, $1, $3); }
+    | expression_list ',' expression { EXPAND( $$, $1, $3 ); }
     ;
 variable_list :
       identifier { N1C ( $$, VARIABLE_LIST, NULL, $1 ); }
-    | variable_list ',' identifier { N2C ( $$, VARIABLE_LIST, NULL, $1, $3 ); }
+    | variable_list ',' identifier { EXPAND( $$, $1, $3 ); }
     ;
 argument_list :
-      expression_list { N1C ( $$, ARGUMENT_LIST, NULL, $1 ); }
+      expression_list { $$ = $1; }
     | /* epsilon */ { $$ = NULL; }
     ;
 parameter_list :
-      variable_list { N1C ( $$, PARAMETER_LIST, NULL, $1 ); }
+      variable_list { $$ = $1; }
     | /* epsilon */ { $$ = NULL; }
     ;
 declaration_list :
       declaration { N1C ( $$, DECLARATION_LIST, NULL, $1 ); }
-    | declaration_list declaration { N2C ($$, DECLARATION_LIST, NULL, $1, $2); }
+    | declaration_list declaration { EXPAND( $$, $1, $2 ); }
     ;
 function :
-      FUNC identifier '(' parameter_list ')' statement
-        { N3C ( $$, FUNCTION, NULL, $2, $4, $6 ); }
+      FUNC identifier '(' parameter_list ')' statement { N3C ( $$, FUNCTION, NULL, $2, $4, $6 ); }
     ;
 statement :
-      assignment_statement { N1C ( $$, STATEMENT, NULL, $1 ); }
-    | return_statement { N1C ( $$, STATEMENT, NULL, $1 ); }
-    | print_statement { N1C ( $$, STATEMENT, NULL, $1 ); }
-    | if_statement { N1C ( $$, STATEMENT, NULL, $1 ); }
-    | while_statement { N1C ( $$, STATEMENT, NULL, $1 ); }
-    | null_statement { N1C ( $$, STATEMENT, NULL, $1 ); }
-    | block { N1C ( $$, STATEMENT, NULL, $1 ); }
+      assignment_statement { $$ = $1; }
+    | return_statement { $$ = $1; }
+    | print_statement { $$ = $1; }
+    | if_statement { $$ = $1; }
+    | while_statement { $$ = $1; }
+    | null_statement { $$ = $1; }
+    | block { $$ = $1; }
     ;
 block :
-      OPENBLOCK declaration_list statement_list CLOSEBLOCK
-        { N2C ($$, BLOCK, NULL, $2, $3); }
+      OPENBLOCK declaration_list statement_list CLOSEBLOCK { N2C ($$, BLOCK, NULL, $2, $3); }
     | OPENBLOCK statement_list CLOSEBLOCK { N1C ($$, BLOCK, NULL, $2 ); }
     ;
 assignment_statement :
@@ -159,9 +168,9 @@ declaration :
     ;
 print_item :
       expression
-        { N1C ( $$, PRINT_ITEM, NULL, $1 ); }
+        { $$ = $1; }
     | string
-        { N1C ( $$, PRINT_ITEM, NULL, $1 ); }
+        { $$ = $1; }
     ;
 identifier: IDENTIFIER { N0C($$, IDENTIFIER_DATA, strdup(yytext) ); }
 number: NUMBER
